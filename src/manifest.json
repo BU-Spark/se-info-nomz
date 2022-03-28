@@ -1,0 +1,22 @@
+{
+    "manifest_version": 2,
+    "name": "Infonomz Browser Extension",
+    "version": "0.01",
+    "minimum_chrome_version": "26",
+    "description": "Track and analyze your media consumption",
+
+    "icons": {
+        "16": "icons/icon16x16.png",
+        "48": "icons/icon48x48.png",
+        "128": "icons/icon128x128.png"
+    },
+    "browser_action": {
+        "default_title": "Infonomz Browser Extension",
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js": ["scripts/contentScript.js"],
+        "run_at": "document_end"
+    }]
+}
