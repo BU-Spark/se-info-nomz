@@ -2,14 +2,11 @@
 <head>
     <meta charset="utf-8">
     <title>Infonomz Browser Extension</title>
-    <link href="style/toggle.css" rel="stylesheet"/>
+    <link href="style/popup.css" rel="stylesheet"/>
+    <script src="scripts/popup.js"></script>
 </head>
 <body>
-    <h1>Toggle url tracking</h1> 
-
-    <div class ="switch">
-        <input type ="checkbox">
-        <span class="slider round"></span>
-    </div>
-    <script src="scripts/popup.js"></script>
+    <h1>Analyze webpage: </h1> 
+    <textarea readonly="true" id="textarea"></textarea>
+    <span id="search" class="clear-tgr">Search</span>
 </body>
