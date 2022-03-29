@@ -1,5 +1,4 @@
 (function(window){
-    
     /**
      * Main settings of the extension
      */  
