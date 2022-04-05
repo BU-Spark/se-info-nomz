@@ -1,5 +1,5 @@
 # InfoNomz
-InfoNomz is a web extension tool that keeps track of your media consumption and converts this data into useful statistics that can be analyzed. InfoNomz notably takes in 
+InfoNomz is a web extension tool that keeps track of your media consumption and converts this data into useful statistics. InfoNomz notably analyzes news media that you consume on a daily basis, and analyzes any sort of political content 
 
 
 # Installation (Google Chrome)
