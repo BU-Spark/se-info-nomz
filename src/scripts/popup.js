@@ -69,6 +69,39 @@
           function queryAllSides(){
             return('This is a test return');
           }
+
+          /**
+           * Takes an input string and checks if there are matches for political leaning.
+           * Returns "No Matches." if there aren't any matches.
+           * This may run into issues where queries come up with multiple publishers, as in NYtimes
+           */
+          function checkBias(input_string){
+
+            // create array of regex values for each political leaning on allsides
+            const biases = [/media-bias\/left-center/, 
+            /media-bias\/left/, 
+            /media-bias\/right-center/, 
+            /media-bias\/right/, 
+            /media-bias\/center/];
+
+            // create array of strings to return, respectively for each regex, above
+            const bias_returns = ["Left Leaning",
+            "Left",
+            "Right Leaning",
+            "Right",
+            "Center"];
+
+            // iterate through biases to check for each one.
+            // *Note: the "___-center" biases are checked first because they are more specific.
+            for (var i = 0; i < biases.length; i++){
+                if (input_string.match(biases[i])) {
+                    return (bias_returns[i]);
+                }
+            }
+
+            // If there are no matches, return default return
+            return("NO MATCHES");
+          }
           
           /**
            * Adjusts the height of the textarea
