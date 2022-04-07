@@ -10,7 +10,7 @@
           //default placeholder of the textarea
           placeholder : "~Enter url here~"
       };
-      
+    
       /**
        * When the document DOM is ready
        */
