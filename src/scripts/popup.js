@@ -59,3 +59,33 @@ function log(txt) {
     var h = $("#log").html();
     $("#log").html(h+"<br>"+txt);
 }
+
+/*
+ * Parses the Bias of an allsides HTML response page.
+ */
+function parseBias(input_string){
+    // create array of regex values for each political leaning on allsides
+    const biases = [/media-bias\/left-center/, 
+    /media-bias\/left/, 
+    /media-bias\/right-center/, 
+    /media-bias\/right/, 
+    /media-bias\/center/];
+
+    // create array of strings to return, respectively for each regex, above
+    const bias_returns = ["Left Leaning",
+    "Left",
+    "Right Leaning",
+    "Right",
+    "Center"];
+
+    // iterate through biases to check for each one.
+    // *Note: the "___-center" biases are checked first because they are more specific.
+    for (var i = 0; i < biases.length; i++){
+        if (input_string.match(biases[i])) {
+            return (bias_returns[i]);
+        }
+    }
+
+    // If there are no matches, return default return
+    return("NO MATCHES");
+  }

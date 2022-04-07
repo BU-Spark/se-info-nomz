@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Infonomz Local Storage</title>
+    </head>
+
+    <body>
+        <h1>Local Storage</h1> 
+    </body>
+
+    <script type="text/javascript">
+        var testObject = {
+            urls: ["www.google.com", "www.bing.com", "www.yahoo.com"],
+            names: ["Google", "Bing", "Yahoo"]
+        };
+        localStorage.setItem("testObject", JSON.stringify(testObject));
+        console.log(localStorage);
+        var jsonString = localStorage.getItem("testObject");
+        var javaObject = JSON.parse(jsonString);
+        console.log(javaObject);
+    </script>
+</html>
