@@ -2,6 +2,10 @@ $(function() {
     $('#btn_check').click(function() { checkCurrentTab(); });
 });
 
+$(function() {
+    $('#query_allsides').click(function() { queryFunction(); });
+});
+
 function checkCurrentTab() {
     // alert('debug1!');
     chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
@@ -19,6 +23,24 @@ function checkCurrentTab() {
         });
 
     });
+}
+
+async function queryAllsides(){
+
+    const response = await fetch('http://www.allsides.com/bias/bias-ratings?field_news_source_type_tid=2&field_news_bias_nid=1&field_featured_bias_rating_value=All&title=new york times');
+    const query = await response.text();
+
+    return query;
+}
+
+function queryFunction(){
+
+    queryAllsides().then(queryResult => {
+        var h = $("#test").html();
+        $("#test").html(h + "Test html response: " + queryResult);
+    });
+
+    // alert('debug');
 }
 
 // inject contentscripts into current tab
