@@ -1,12 +1,14 @@
-<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>Infonomz Browser Extension</title>
-    <link href="style/popup.css" rel="stylesheet"/>
-    <script src="scripts/popup.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="scripts/popup.js"></script>
 </head>
-<body>
-    <h1>Analyze webpage: </h1> 
-    <textarea readonly="true" id="textarea"></textarea>
-    <span id="search" class="clear-tgr">Search</span>
+<body class="body-popup">
+    <button id="btn_check" class="btn btn-warning">check current tab</button>
+    <hr>
+    <div id="pg_url"></div>
+    <hr>
+    <div id="log"></div>
 </body>
+</html>
+
