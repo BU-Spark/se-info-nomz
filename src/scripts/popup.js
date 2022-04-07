@@ -1,146 +1,91 @@
-(function(window){
-    /**
-     * Main settings of the extension
-     */  
-      var settings = {
-          //min height of the textarea (when it's empty)
-          minHeight : 38,
-          //maximum height of the textarea
-          maxHeight : 300,
-          //default placeholder of the textarea
-          placeholder : "~Enter url here~"
-      };
-      
-      /**
-       * When the document DOM is ready
-       */
-      document.addEventListener('DOMContentLoaded', function () {
-          var textarea = document.getElementById('textarea'),
-          search = document.getElementById('search'),
-          overflowEvent = new CustomEvent("isOverflow");
-  
-          
-          /**
-           * As soon as saving text is possible we enable the textarea
-           */
-          textarea.removeAttribute('readonly');
-          
-          /**
-           * Events the search trigger listens to
-           */
-          search.addEventListener('click', function(){
-              textarea.value = '';
-              textarea.focus();
+$(function() {
+    $('#btn_check').click(function() { checkCurrentTab(); });
+});
 
-              var queryResult = queryAllSides();
-              textarea.setAttribute('placeholder', queryResult);              
-          });
-          
-          /**
-           * Events the textarea listens to
-           */
-          textarea.addEventListener('isEmpty', function(e){
-              //when the popup is empty we set it to its minimum height
-              setHeight(settings.minHeight);
-          });
-          
-          textarea.addEventListener('isOverflow', function(e){
-              //when the text overflows the popup, we make the popup expand with its content
-              setHeight();
-          });
-      
-          textarea.addEventListener('input', function(e){
-              //whenever content is added to the textarea via the user interface
-              if(textarea.value.trim() == ''){
-                  textarea.dispatchEvent(searchEvent);
-              }
-              if(textarea.scrollHeight > textarea.offsetHeight){
-                  textarea.dispatchEvent(overflowEvent);
-              }
-              
-              //Since window.onblur is not triggered when popup is closed/out-of-focus https://code.google.com/p/chromium/issues/detail?id=225917
-              //We save everytime there is an input
-              saveTextarea();
-          });
-          
-          /**
-           * Query all sides based on url in textarea
-           */
-          function queryAllSides(){
-            return('This is a test return');
-          }
+$(function() {
+    $('#query_allsides').click(function() { queryFunction(); });
+});
 
-          /**
-           * Takes an input string and checks if there are matches for political leaning.
-           * Returns "No Matches." if there aren't any matches.
-           * This may run into issues where queries come up with multiple publishers, as in NYtimes
-           */
-          function checkBias(input_string){
+function checkCurrentTab() {
+    // alert('debug1!');
+    chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+        // gets current tab's url and stores in var url
+        var url = tabs[0].url;
+        $(".pg_url").text(url);
 
-            // create array of regex values for each political leaning on allsides
-            const biases = [/media-bias\/left-center/, 
-            /media-bias\/left/, 
-            /media-bias\/right-center/, 
-            /media-bias\/right/, 
-            /media-bias\/center/];
+        // alert('URL:');
+        alert(url);
+        // alert('AFTER URL');
+        
+        // request content_script to retrieve title element innerHTML from current tab
+        chrome.tabs.sendMessage(tabs[0].id, "getHeadTitle", null, function(obj) {
+            console.log("getHeadTitle.from content_script:", obj);
+        });
 
-            // create array of strings to return, respectively for each regex, above
-            const bias_returns = ["Left Leaning",
-            "Left",
-            "Right Leaning",
-            "Right",
-            "Center"];
+    });
+}
 
-            // iterate through biases to check for each one.
-            // *Note: the "___-center" biases are checked first because they are more specific.
-            for (var i = 0; i < biases.length; i++){
-                if (input_string.match(biases[i])) {
-                    return (bias_returns[i]);
-                }
-            }
+async function queryAllsides(){
 
-            // If there are no matches, return default return
-            return("NO MATCHES");
-          }
-          
-          /**
-           * Adjusts the height of the textarea
-           */
-          function setHeight(value){
-              var val = value || Math.min(textarea.scrollHeight, settings.maxHeight);
-              textarea.style.height = val + 'px';
-          }
-          
-          /**
-           * What we do at page load
-           */
-          function init(){
-              textarea.setAttribute('placeholder', settings.placeholder);
-              fillTextarea();
-              textarea.focus();
-              setHeight();
-          }
-          
-          /**
-           * Start
-           */
-          init();
-  
-      });
-      /**
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-39772841-1']);
-        _gaq.push(['_trackPageview']);
-    
-        (function() {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = 'https://ssl.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-       */
-      
-      
-  })(this);
+    const response = await fetch('http://www.allsides.com/bias/bias-ratings?field_news_source_type_tid=2&field_news_bias_nid=1&field_featured_bias_rating_value=All&title=new york times');
+    const query = await response.text();
+
+    return query;
+}
+
+function queryFunction(){
+
+    queryAllsides().then(queryResult => {
+        var h = $("#test").html();
+        $("#test").html(h + "Test html response: " + queryResult);
+    });
+
+    // alert('debug');
+}
+
+// inject contentscripts into current tab
+document.addEventListener('DOMContentLoaded', function () {
+    chrome.windows.getCurrent(function (currentWindow) {
+        chrome.tabs.query({active: true, windowId: currentWindow.id}, function(activeTabs) {
+            // alert('inside chrome tabs query');
+            // alert(activeTabs[0].id);
+            chrome.tabs.executeScript(activeTabs[0].id, {file: "scripts/contentScript.js", allFrames: false});
+            // alert('after chrome tabs execute Script');
+        });
+    });
+});
+
+function log(txt) {
+    var h = $("#log").html();
+    $("#log").html(h+"<br>"+txt);
+}
+
+/*
+ * Parses the Bias of an allsides HTML response page.
+ */
+function parseBias(input_string){
+    // create array of regex values for each political leaning on allsides
+    const biases = [/media-bias\/left-center/, 
+    /media-bias\/left/, 
+    /media-bias\/right-center/, 
+    /media-bias\/right/, 
+    /media-bias\/center/];
+
+    // create array of strings to return, respectively for each regex, above
+    const bias_returns = ["Left Leaning",
+    "Left",
+    "Right Leaning",
+    "Right",
+    "Center"];
+
+    // iterate through biases to check for each one.
+    // *Note: the "___-center" biases are checked first because they are more specific.
+    for (var i = 0; i < biases.length; i++){
+        if (input_string.match(biases[i])) {
+            return (bias_returns[i]);
+        }
+    }
+
+    // If there are no matches, return default return
+    return("NO MATCHES");
+  }
