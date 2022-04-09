@@ -1,0 +1,13 @@
+import pytest
+
+# name of the fixture function
+@pytest.mark.usefixtures("test")
+class Test:
+    def test_title(self):
+        self.driver.get('https://google.com')
+        assert self.driver.title == "Google"
+
+    def test_title_blog(self):
+        self.driver.get('https://youtube.com')
+        assert self.driver.title == "YouTube"
+
