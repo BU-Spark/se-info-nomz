@@ -1,4 +1,6 @@
-For all things related to Selenium, please follow this guide. (pictures coming soon)
+For all things related to Selenium, please follow this guide. (pictures coming soon).
+
+As of now, we are currently figuring out a way to automate the packing of an src directory into a .crx file in order to automate with GitHub actions. Until then, we will be using the strategies below to test our extensions.
 
 # Testing Chrome Extensions w/ Selenium
 1. Download and install the **InfoNomz** browser extension on your Google Chrome. Instructions for installing it can be found in the README. 
