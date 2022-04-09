@@ -7,7 +7,7 @@ class Test:
         self.driver.get('https://google.com')
         assert self.driver.title == "Google"
 
-    def test_title_blog(self):
+    def test_title2(self):
         self.driver.get('https://youtube.com')
         assert self.driver.title == "YouTube"
 
