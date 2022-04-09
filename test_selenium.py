@@ -1,7 +1,7 @@
 import pytest
 
 # name of the fixture function
-@pytest.mark.usefixtures("test")
+@pytest.mark.usefixtures("setup")
 class Test:
     def test_title(self):
         self.driver.get('https://google.com')
