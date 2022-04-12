@@ -22,7 +22,7 @@ from webdriver_manager.utils import ChromeType
 # print("done testing selenium")
 
 @pytest.fixture()
-def setup(request):
+def test(request):
     chrome_service = Service(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install())
 
     chrome_options = ChromeOptions()

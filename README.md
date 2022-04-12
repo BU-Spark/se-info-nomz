@@ -1,5 +1,5 @@
 # InfoNomz (pictures coming soon)
-InfoNomz is a web extension tool that keeps track of your media consumption and converts this data into useful statistics. InfoNomz notably analyzes news media that you consume on a daily basis, and sorts any political content into a specific political leaning, based on that website's historical political leaning, with the help of [AllSides Media Bias Ratings](https://www.allsides.com/media-bias). 
+InfoNomz is a web extension tool that keeps track of your media consumption and converts this data into useful statistics. InfoNomz notably analyzes news media that you consume on a daily basis, and sorts any political content into a specific political leaning, based on that website's historical political leaning, with the help of [AllSides Media Bias Ratings](https://www.allsides.com/media-bias). InfoNomz will also even be able to offer you alternative sources of news media that may provide a differening perspective compared to your typical consumption, or other topics that you may not explore as often.
 
 
 # Installation (Google Chrome)
