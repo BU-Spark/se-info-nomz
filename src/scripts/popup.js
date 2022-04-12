@@ -37,7 +37,9 @@ function queryFunction(){
 
     queryAllsides().then(queryResult => {
         var h = $("#test").html();
-        $("#test").html(h + "Test html response: " + queryResult);
+        //$("#test").html(h + "Test html response: " + queryResult);
+        const pub_bias = parseBias(queryResult);
+        $("#test").html(h + "Article bias: " + pub_bias);
     });
 
     // alert('debug');
