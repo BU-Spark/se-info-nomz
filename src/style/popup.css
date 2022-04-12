@@ -19,7 +19,7 @@ body{
     padding:5px;
     border-left-width: 3px;
     border-radius: 5px;
-    border-left-color: var(--bs-primary);
+    border-left-color: #e35ba3;
     margin-bottom:7px;
 }
 .callout-political {
@@ -27,7 +27,7 @@ body{
     padding:5px;
     border-left-width: 3px;
     border-radius: 5px;
-    border-left-color: var(--bs-warning);
+    border-left-color: #e57682;
     margin-bottom:7px;
 }
 .callout-topical {
@@ -35,7 +35,7 @@ body{
     padding:5px;
     border-left-width: 3px;
     border-radius: 5px;
-    border-left-color: var(--bs-secondary);
+    border-left-color: #8093e2;
     margin-bottom:7px;
 }
 
