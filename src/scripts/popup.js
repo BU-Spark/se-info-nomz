@@ -7,11 +7,15 @@ $(function() {
 });
 
 $(function() {
-    $('#local_storage').click(function() { log_storage(); });
+    $('#display_urls').click(function() { log_urls(); });
 });
 
 $(function() {
-    $('#reset_storage').click(function() { reset_storage(); });
+    $('#display_bias').click(function() { log_bias(); });
+});
+
+$(function() {
+    $('#reset_urls').click(function() { reset_urls(); });
 });
 
 
@@ -24,10 +28,10 @@ function checkCurrentTab() {
 
         alert(url);
 
-        var jsonString = localStorage.getItem("URLS");
+        var jsonString = localStorage.getItem("InfoNomz");
         var jsonObject = JSON.parse(jsonString);
-        jsonObject.urls.push(url)
-        localStorage.setItem("URLS", JSON.stringify(jsonObject));
+        jsonObject.urls.push(url);
+        localStorage.setItem("InfoNomz", JSON.stringify(jsonObject));
         
         // request content_script to retrieve title element innerHTML from current tab
         chrome.tabs.sendMessage(tabs[0].id, "getHeadTitle", null, function(obj) {
@@ -74,20 +78,28 @@ function log(txt) {
     $("#log").html(h+"<br>"+txt);
 }
 
-function log_storage(){
-    var jsonString = localStorage.getItem("URLS");
-    var javaObject = JSON.parse(jsonString);
+function log_urls(){
+    var current_json = JSON.parse(localStorage.getItem("InfoNomz"));
+    $("#log_urls").html(current_json.urls.join(", "));
+}
+
+function reset_urls(){
+    var current_json = JSON.parse(localStorage.getItem("InfoNomz"));
+    current_json.urls = [];
+    localStorage.setItem("InfoNomz", JSON.stringify(current_json));
     //console.log(javaObject);
-    $("#log_storage").html(jsonString);
+    $("#log_urls").html("URLS Reset!");
     //alert(jQuery.type(jsonString));
 }
 
-function reset_storage(){
-    var starting_json = {urls: [""]};
-    localStorage.setItem("URLS", JSON.stringify(starting_json));
-    //console.log(javaObject);
-    $("#log_storage").html("History Reset!");
-    //alert(jQuery.type(jsonString));
+function log_bias(){
+    var bias_json = JSON.parse(localStorage.getItem("InfoNomz")).political_bias;
+    $("#log_urls").html(JSON.stringify(bias_json));
+}
+
+function updateBias(bias_string){
+    var current_json = JSON.parse(localStorage.getItem("InfoNomz"));
+    //current_json.political_bias
 }
 
 

@@ -19,11 +19,12 @@ chrome.webNavigation.onTabReplaced.addListener(function(activeTab){
 
 chrome.runtime.onStartup.addListener(function() {
     alert('open')
-    var check = localStorage.getItem("URLS");//REMOVE THIS AFTER 
+    var check = localStorage.getItem("InfoNomz");//REMOVE THIS AFTER 
     if(check){
-        localStorage.removeItem("URLS")
+        localStorage.removeItem("InfoNomz");
     }
-    var starting_json = {urls: []};
+    var starting_json = {urls: [], political_bias:{left:0, left_leaning:0, center:0, right_leaning:0, right:0}};
     starting_json.urls.push("www.url.com");
-    localStorage.setItem("URLS", JSON.stringify(starting_json));
+    localStorage.setItem("InfoNomz", JSON.stringify(starting_json));
 });
+
