@@ -16,3 +16,14 @@ chrome.webNavigation.onTabReplaced.addListener(function(activeTab){
         // alert('alert 3');
     });
 });
+
+chrome.runtime.onStartup.addListener(function() {
+    alert('open')
+    var check = localStorage.getItem("URLS");//REMOVE THIS AFTER 
+    if(check){
+        localStorage.removeItem("URLS")
+    }
+    var starting_json = {urls: []};
+    starting_json.urls.push("www.url.com");
+    localStorage.setItem("URLS", JSON.stringify(starting_json));
+});

@@ -6,16 +6,28 @@ $(function() {
     $('#query_allsides').click(function() { queryFunction(); });
 });
 
+$(function() {
+    $('#local_storage').click(function() { log_storage(); });
+});
+
+$(function() {
+    $('#reset_storage').click(function() { reset_storage(); });
+});
+
+
 function checkCurrentTab() {
-    // alert('debug1!');
+    //alert('debug1!');
     chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
         // gets current tab's url and stores in var url
         var url = tabs[0].url;
         $(".pg_url").text(url);
 
-        // alert('URL:');
         alert(url);
-        // alert('AFTER URL');
+
+        var jsonString = localStorage.getItem("URLS");
+        var jsonObject = JSON.parse(jsonString);
+        jsonObject.urls.push(url)
+        localStorage.setItem("URLS", JSON.stringify(jsonObject));
         
         // request content_script to retrieve title element innerHTML from current tab
         chrome.tabs.sendMessage(tabs[0].id, "getHeadTitle", null, function(obj) {
@@ -37,7 +49,9 @@ function queryFunction(){
 
     queryAllsides().then(queryResult => {
         var h = $("#test").html();
-        $("#test").html(h + "Test html response: " + queryResult);
+        //$("#test").html(h + "Test html response: " + queryResult);
+        const pub_bias = parseBias(queryResult);
+        $("#test").html(h + "Article bias: " + pub_bias);
     });
 
     // alert('debug');
@@ -59,6 +73,23 @@ function log(txt) {
     var h = $("#log").html();
     $("#log").html(h+"<br>"+txt);
 }
+
+function log_storage(){
+    var jsonString = localStorage.getItem("URLS");
+    var javaObject = JSON.parse(jsonString);
+    //console.log(javaObject);
+    $("#log_storage").html(jsonString);
+    //alert(jQuery.type(jsonString));
+}
+
+function reset_storage(){
+    var starting_json = {urls: [""]};
+    localStorage.setItem("URLS", JSON.stringify(starting_json));
+    //console.log(javaObject);
+    $("#log_storage").html("History Reset!");
+    //alert(jQuery.type(jsonString));
+}
+
 
 /*
  * Parses the Bias of an allsides HTML response page.
