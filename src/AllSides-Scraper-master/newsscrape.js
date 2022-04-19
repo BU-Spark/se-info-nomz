@@ -72,35 +72,28 @@ pages.forEach(function(page) {
           var $ = cheerio.load(queryResult);
 
           $("a").each(function (i, element) {
-            // console.log("HELOOOOOOOOOOOOOOOOOOOOOOOOOOo");
-            // Make sure the element has a child (otherwise it is the wrong link)
-            if (element.children[0] != undefined) {
-              // Make sure the child has attributes (otherwise it is the wrong link)
-              if (element.children[0].attribs != undefined) {
-                var image = element.children[0].attribs.style;
-                // Make sure the style attribute is not undefined (otherwise it is the wrong link)
-                if (image != undefined) {
-                  // Make sure the image style is "background-image ..." (otherwise it is the wrong link)
-                  if (image.match(/background-image*/)){
-                    var url = element.attribs.href;
-                    if (url != undefined) {
-                      console.log(url);
-                      if (url.match(/^http:\/\//) || url.match(/^www\./) || url.match(/^https:\/\//)) {
-                        console.log("***OK");
-                        var domain = url.replace(/^https?:\/\//,''); // Strip off https:// and/or http://
-                        domain = domain.replace(/^www\./,''); // Strip off www.
-                        domain = domain.split('/')[0]; // Get the domain and just the domain (not the path)
-                        
+            try {
+              if (element.children[0].attribs.style.match(/background-image*/)){
+                var url = element.attribs.href;
 
-                        setTimeout(function(){
-                        console.log("*******Put to Data********");
-                        putData(domain, title, rating, url);}, 10000);
-                      }
-                    }
-                  }
+                console.log(url);
+                if (url.match(/^http:\/\//) || url.match(/^www\./) || url.match(/^https:\/\//)) {
+                  console.log("***OK");
+                  var domain = url.replace(/^https?:\/\//,''); // Strip off https:// and/or http://
+                  domain = domain.replace(/^www\./,''); // Strip off www.
+                  domain = domain.split('/')[0]; // Get the domain and just the domain (not the path)
+                  
+
+                  setTimeout(function(){
+                  console.log("*******Put to Data********");
+                  putData(domain, title, rating, url);}, 10000);
                 }
               }
+            } catch {
+              // console.log("incorrect link");
+              // Do nothing.
             }
+
           });
 
           // write to file
