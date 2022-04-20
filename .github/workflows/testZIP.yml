@@ -1,23 +1,23 @@
-
 name: Zip Files
 
+# do this on every push/PR on dev branch
 on:
   push:
     branches: [ dev ]
   pull_request:
     branches: [ dev ]
 
+# zip the src folder and upload it as an artifact for workspace
 jobs:
-  zip-files:
+  upload-src:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: papeloto/action-zip@v1
-        with:
-          files: src/ manifest.json
-          dest: result.zip
-
+#       - uses: papeloto/action-zip@v1
+#         with:
+#           files: src/ manifest.json
+#           dest: result.zip
       - uses: actions/upload-artifact@v1
         with:
           name: my-artifact
-          path: ${{ github.workspace }}/result.zip
+          path: ${{ github.workspace }}/src/
