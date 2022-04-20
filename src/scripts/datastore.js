@@ -13,3 +13,5 @@ var jsonString = localStorage.getItem("testObject");
 //parses the JSON string back into javascript object
 var javaObject = JSON.parse(jsonString);
 console.log(javaObject);
+
+var test = {urls: [""], political_bias:{left:0,left_leaning:0,center:0,right_leaning:0,right:0}}
