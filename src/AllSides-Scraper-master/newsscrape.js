@@ -12,10 +12,10 @@ var _ = require('lodash');
 _.mixin({deepExtend: underscoreDeepExtend(_)});
 
 
-async function queryAllsides(url){
+async function makeGetRequest(url){
 
   const response = await fetch(url);
-  const query = response.text();
+  const query = await response.text();
 
   return query;
 }
@@ -34,7 +34,7 @@ pages.forEach(function(page) {
   var url = 'https://www.allsides.com/media-bias/ratings?field_featured_bias_rating_value=All&field_news_source_type_tid%5B%5D=2&field_news_bias_nid_1%5B1%5D=1&field_news_bias_nid_1%5B2%5D=2&field_news_bias_nid_1%5B3%5D=3&title=';
   url = url + "&page=" + page;
   console.log("URL********** " + url);
-  queryAllsides(url).then(queryResult => {
+  makeGetRequest(url).then(queryResult => {
   
     console.log(queryResult.length);
   // request(optionsPages, function (error, response, body) {
@@ -67,7 +67,7 @@ pages.forEach(function(page) {
       setTimeout(function(){
         // console.log("*******Querying to for url********");
 
-      queryAllsides(pageLink).then(queryResult => {
+      makeGetRequest(pageLink).then(queryResult => {
         // if (error) throw new Error(error);
           var $ = cheerio.load(queryResult);
 
@@ -95,12 +95,6 @@ pages.forEach(function(page) {
             }
 
           });
-
-          // write to file
-          // fs.writeFileSync('biasRatings.json', JSON.stringify(data), function (err) {
-          //   if (err) throw new Error(error);
-          //   // console.log('Writing to file...');
-          // });
       });
           }, 2000);
     });
@@ -110,15 +104,17 @@ pages.forEach(function(page) {
 return data;
 }
 
-function writeData() {
-  fs.writeFileSync('biasRatings.json', JSON.stringify(data), function (err) {
+async function writeData() {
+  await fs.writeFileSync('biasRatings.json', "data = \'[" + JSON.stringify(data) + "\]'", function (err) {
     if (err) throw new Error(error);
     console.log('Writing to file...');
   });
 }
 
-function buildJson(writeData) {
+async function buildJson(writeData) {
+  
   getData(putData);
+  // timeout for writing to file to ensure that all data is in memory before writing
   setTimeout(function(){
   console.log("*******Wrote to file********");
   writeData();}, 90000);
