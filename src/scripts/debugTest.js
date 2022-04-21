@@ -1,30 +1,80 @@
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
-    // alert(changeInfo.url);
-    // alert('alert 1');
-});
+    if(changeInfo.url){
+        //Take current tab URL and parse out base
+        var trimmedURL = changeInfo.url.replace(/^https?:\/\//,'');
+        trimmedURL = trimmedURL.replace(/^www\./,'');
+        trimmedURLPart2 = trimmedURL;
+        trimmedURLPart2 = trimmedURLPart2.split('/')[1];
+        trimmedURL = trimmedURL.split('/')[0];
 
-chrome.tabs.onActivated.addListener(function(activeInfo){
-    chrome.tabs.get(activeInfo.tabId, function(tab){
-        // alert(tab.url);
-        // alert('alert 2');
-    });
-});
-
-chrome.webNavigation.onTabReplaced.addListener(function(activeTab){
-    chrome.tabs.get(activeTab.tabId, function(tab){
-        // alert(tab.url);
-        // alert('alert 3');
-    });
-});
-
-chrome.runtime.onStartup.addListener(function() {
-    alert('open')
-    var check = localStorage.getItem("InfoNomz");//REMOVE THIS AFTER 
-    if(check){
-        localStorage.removeItem("InfoNomz");
+        var current_json = JSON.parse(localStorage.getItem("biasRatings"));
+        //check to see if current URL matches any in the JSON file
+        //also check that current tab is not the home page of website
+        if(trimmedURLPart2 !== ""){
+            if(current_json[trimmedURL]){
+                //get current date
+                var today = new Date();
+                var day = String(today.getDate()) //gets current day of month
+                var month = String(today.getMonth()+1) //gets current month; Note that January is 0
+                var year = String(today.getFullYear()) //gets current year
+                var currentDate = month + '/' + day + '/' + year
+    
+                //check to see if there is already a JSON entry for the current date
+                var rating = current_json[trimmedURL].rating
+                if(localStorage.getItem(currentDate)){
+                    //alert('There is already an entry for current Date')
+                    //If there already is an entry for current date, update entry
+                    var bias_json = JSON.parse(localStorage.getItem(currentDate));
+                    if(rating === "Left"){
+                        bias_json.Left = bias_json.Left+1;
+                    }else if(rating === "Lean Left"){
+                        bias_json.LeanLeft = bias_json.LeanLeft+1;
+                    }else if(rating === "Center"){
+                        bias_json.Center = bias_json.Center+1;
+                    }else if(rating === "Lean Right"){
+                        bias_json.LeanRight = bias_json.LeanRight+1;
+                    }else if(rating === "Right"){
+                        bias_json.Right = bias_json.Right+1;
+                    }
+                    
+                    // alert("Left: " + bias_json.Left)
+                    // alert("Lean Left: " +bias_json.LeanLeft)
+                    // alert("Center: " +bias_json.Center)
+                    // alert("Lean Right: " +bias_json.LeanRight)
+                    // alert("Right: " +bias_json.Right)
+                    localStorage.setItem(currentDate, JSON.stringify(bias_json));
+    
+                }else{
+                    //alert('There is no entry for current date')
+                    //If there is no entry for current date, create entry
+                    var biasData = '{'
+                        +'"Left" : 0,'
+                        +'"LeanLeft"  : 0,'
+                        +'"Center" : 0,'
+                        +'"LeanRight" : 0,'
+                        +'"Right" : 0'
+                        +'}';
+                    var temp = JSON.parse(biasData)
+    
+                    if(rating === "Left"){
+                        temp.Left = 1;
+                    }else if(rating === "Lean Left"){
+                        temp.LeanLeft = 1;
+                    }else if(rating === "Center"){
+                        temp.Center = 1;
+                    }else if(rating === "Lean Right"){
+                        temp.LeanRight = 1;
+                    }else if(rating === "Right"){
+                        temp.Right = 1;
+                    }
+                    biasData = JSON.stringify(temp);
+    
+                    //alert(biasData)
+    
+                    localStorage.setItem(currentDate, biasData);
+                }
+            }
+        }
+        
     }
-    var starting_json = {urls: [], political_bias:{left:0, left_leaning:0, center:0, right_leaning:0, right:0}};
-    starting_json.urls.push("www.url.com");
-    localStorage.setItem("InfoNomz", JSON.stringify(starting_json));
 });
-
