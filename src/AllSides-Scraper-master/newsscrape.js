@@ -105,7 +105,7 @@ return data;
 }
 
 async function writeData() {
-  await fs.writeFileSync('biasRatings.json', "data = \'[" + JSON.stringify(data) + "\]'", function (err) {
+  await localStorage.setItem('biasRatings', "data = " + JSON.stringify(data), function (err) {
     if (err) throw new Error(error);
     console.log('Writing to file...');
   });
