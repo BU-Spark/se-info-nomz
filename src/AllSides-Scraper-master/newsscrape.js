@@ -17,21 +17,12 @@ const queryAllsides = async function(url){
   return returnValue;
 }
 
-const queryAllsides2 = function (value){
-  return new Promise(function (resolve, reject) {
-      const options = {
-          method: 'GET',
-          url: value
-      }
+async function makeGetRequest(url){
 
-      request(options, function(error, response, body){
-          if(error)
-              throw new Error(error)
-          else{
-              resolve(body)
-          }
-      })
-  })
+  const response = await fetch(url);
+  const query = await response.text();
+
+  return query;
 }
 
 function putData(domain, title, rating, url) {
@@ -48,8 +39,8 @@ pages.forEach(function(page) {
   var url = 'https://www.allsides.com/media-bias/ratings?field_featured_bias_rating_value=All&field_news_source_type_tid%5B%5D=2&field_news_bias_nid_1%5B1%5D=1&field_news_bias_nid_1%5B2%5D=2&field_news_bias_nid_1%5B3%5D=3&title=';
   url = url + "&page=" + page;
   console.log("URL********** " + url);
-
-  queryAllsides2(url).then(queryResult => {
+  
+  makeGetRequest(url).then(queryResult => {
   
     console.log(queryResult.length);
   // request(optionsPages, function (error, response, body) {
@@ -82,7 +73,7 @@ pages.forEach(function(page) {
       setTimeout(function(){
         // console.log("*******Querying to for url********");
 
-      queryAllsides(pageLink).then(queryResult => {
+      makeGetRequest(pageLink).then(queryResult => {
         // if (error) throw new Error(error);
           if(queryResult){
             console.log('DEBUGURL'+ pageLink)
@@ -93,55 +84,30 @@ pages.forEach(function(page) {
           var $ = cheerio.load(queryResult);
 
           $("a").each(function (i, element) {
-            // console.log("HELOOOOOOOOOOOOOOOOOOOOOOOOOOo");
-            // Make sure the element has a child (otherwise it is the wrong link)
-            if (element.children[0] != undefined) {
-              // Make sure the child has attributes (otherwise it is the wrong link)
-              if (element.children[0].attribs != undefined) {
-                var image = element.children[0].attribs.style;
-                // Make sure the style attribute is not undefined (otherwise it is the wrong link)
-                if (image != undefined) {
-                  // Make sure the image style is "background-image ..." (otherwise it is the wrong link)
-                  if (image.match(/background-image*/)){
-                    var url = element.attribs.href;
-                    if (url != undefined) {
-                      console.log(url);
-                      if (url.match(/^http:\/\//) || url.match(/^www\./) || url.match(/^https:\/\//)) {
-                        console.log("***OK");
-                        var domain = url.replace(/^https?:\/\//,''); // Strip off https:// and/or http://
-                        domain = domain.replace(/^www\./,''); // Strip off www.
-                        domain = domain.split('/')[0]; // Get the domain and just the domain (not the path)
-                        
+            try {
+              if (element.children[0].attribs.style.match(/background-image*/)){
+                var url = element.attribs.href;
 
-                        setTimeout(function(){
-                        console.log("*******Put to Data********");
-                        putData(domain, title, rating, url);}, 10000);
-                      }else{
-                        console.log('debug if 6');
-                      }
-                    }else{
-                      console.log('debug if 5');
-                    }
-                  }else{
-                    console.log('debug if 4');
-                    console.log(url);
-                  }
-                }else{
-                  // console.log('debug if 3');
-                }
-              }else{
-                // console.log('debug if 2');
-              }
+                console.log(url);
+                if (url.match(/^http:\/\//) || url.match(/^www\./) || url.match(/^https:\/\//)) {
+                  console.log("***OK");
+                  var domain = url.replace(/^https?:\/\//,''); // Strip off https:// and/or http://
+                  domain = domain.replace(/^www\./,''); // Strip off www.
+                  domain = domain.split('/')[0]; // Get the domain and just the domain (not the path)
+                  
+
+                  setTimeout(function(){
+                  console.log("*******Put to Data********");
+                  putData(domain, title, rating, url);}, 10000);
             }else{
               console.log('debug if 1');
+              
+            } catch {
+              // console.log("incorrect link");
+              // Do nothing.
             }
-          });
 
-          // write to file
-          // fs.writeFileSync('biasRatings.json', JSON.stringify(data), function (err) {
-          //   if (err) throw new Error(error);
-          //   // console.log('Writing to file...');
-          // });
+          });
       });
           }, 9000);
     });
@@ -151,15 +117,17 @@ pages.forEach(function(page) {
 return data;
 }
 
-function writeData() {
-  fs.writeFileSync('biasRatings.json', JSON.stringify(data), function (err) {
+async function writeData() {
+  await fs.writeFileSync('biasRatings.json', "data = \'[" + JSON.stringify(data) + "\]'", function (err) {
     if (err) throw new Error(error);
     console.log('Writing to file...');
   });
 }
 
-function buildJson(writeData) {
+async function buildJson(writeData) {
+  
   getData(putData);
+  // timeout for writing to file to ensure that all data is in memory before writing
   setTimeout(function(){
   console.log("*******Wrote to file********");
   writeData();}, 60000);
