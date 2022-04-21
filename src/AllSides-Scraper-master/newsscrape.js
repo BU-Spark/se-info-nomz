@@ -11,13 +11,27 @@ var file = fs.createWriteStream('biasRatings.json');
 var _ = require('lodash');
 _.mixin({deepExtend: underscoreDeepExtend(_)});
 
+const queryAllsides = async function(url){
+  let returnValueRaw = await fetch(url);
+  let returnValue = await returnValueRaw.text();
+  return returnValue;
+}
 
-async function queryAllsides(url){
+const queryAllsides2 = function (value){
+  return new Promise(function (resolve, reject) {
+      const options = {
+          method: 'GET',
+          url: value
+      }
 
-  const response = await fetch(url);
-  const query = response.text();
-
-  return query;
+      request(options, function(error, response, body){
+          if(error)
+              throw new Error(error)
+          else{
+              resolve(body)
+          }
+      })
+  })
 }
 
 function putData(domain, title, rating, url) {
@@ -34,7 +48,8 @@ pages.forEach(function(page) {
   var url = 'https://www.allsides.com/media-bias/ratings?field_featured_bias_rating_value=All&field_news_source_type_tid%5B%5D=2&field_news_bias_nid_1%5B1%5D=1&field_news_bias_nid_1%5B2%5D=2&field_news_bias_nid_1%5B3%5D=3&title=';
   url = url + "&page=" + page;
   console.log("URL********** " + url);
-  queryAllsides(url).then(queryResult => {
+
+  queryAllsides2(url).then(queryResult => {
   
     console.log(queryResult.length);
   // request(optionsPages, function (error, response, body) {
@@ -69,6 +84,12 @@ pages.forEach(function(page) {
 
       queryAllsides(pageLink).then(queryResult => {
         // if (error) throw new Error(error);
+          if(queryResult){
+            console.log('DEBUGURL'+ pageLink)
+            console.log('Query Result: ' + queryResult);
+          }else{
+            console.log('Nothing returned for get request');
+          }
           var $ = cheerio.load(queryResult);
 
           $("a").each(function (i, element) {
@@ -95,11 +116,24 @@ pages.forEach(function(page) {
                         setTimeout(function(){
                         console.log("*******Put to Data********");
                         putData(domain, title, rating, url);}, 10000);
+                      }else{
+                        console.log('debug if 6');
                       }
+                    }else{
+                      console.log('debug if 5');
                     }
+                  }else{
+                    console.log('debug if 4');
+                    console.log(url);
                   }
+                }else{
+                  // console.log('debug if 3');
                 }
+              }else{
+                // console.log('debug if 2');
               }
+            }else{
+              console.log('debug if 1');
             }
           });
 
@@ -109,7 +143,7 @@ pages.forEach(function(page) {
           //   // console.log('Writing to file...');
           // });
       });
-          }, 2000);
+          }, 9000);
     });
   });
 
@@ -128,7 +162,7 @@ function buildJson(writeData) {
   getData(putData);
   setTimeout(function(){
   console.log("*******Wrote to file********");
-  writeData();}, 90000);
+  writeData();}, 60000);
   };
 
 buildJson(writeData);
