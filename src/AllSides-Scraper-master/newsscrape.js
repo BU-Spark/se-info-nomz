@@ -9,6 +9,11 @@ const fetch = require('node-fetch');
 // var _ = require('lodash');
 // _.mixin({deepExtend: underscoreDeepExtend(_)});
 
+const queryAllsides = async function(url){
+  let returnValueRaw = await fetch(url);
+  let returnValue = await returnValueRaw.text();
+  return returnValue;
+}
 
 async function makeGetRequest(url){
 
@@ -69,6 +74,12 @@ pages.forEach(function(page) {
 
       makeGetRequest(pageLink).then(queryResult => {
         // if (error) throw new Error(error);
+          if(queryResult){
+            console.log('DEBUGURL'+ pageLink)
+            console.log('Query Result: ' + queryResult);
+          }else{
+            console.log('Nothing returned for get request');
+          }
           var $ = cheerio.load(queryResult);
 
           $("a").each(function (i, element) {
@@ -88,6 +99,8 @@ pages.forEach(function(page) {
                   console.log("*******Put to Data********");
                   putData(domain, title, rating, url);}, 10000);
                 }
+              }else{
+                // console.log('debug if 2');
               }
             } catch {
               // console.log("incorrect link");
@@ -96,7 +109,7 @@ pages.forEach(function(page) {
 
           });
       });
-          }, 2000);
+          }, 9000);
     });
   });
 
@@ -118,7 +131,7 @@ async function buildJson(writeData) {
   // timeout for writing to file to ensure that all data is in memory before writing
   setTimeout(function(){
   console.log("*******Wrote to file********");
-  writeData();}, 90000);
+  writeData();}, 60000);
   };
 
 buildJson(writeData);
