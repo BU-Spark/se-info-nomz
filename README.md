@@ -10,3 +10,5 @@ InfoNomz is a web extension tool that keeps track of your media consumption and 
 
 # Usage
 1. After installing InfoNomz, check the top-right corner and click on the jigsaw icon. Click on "InfoNomz Browser Extension" to access the tool. You can additionally **pin** it for ease of access.
+
+test
