@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9"]
+        python-version: ["3.9"]
 
     steps:
       # setup repo directory
@@ -23,6 +23,8 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
+        
+    # create the .crx file automatically and upload it as an artifact
     - name: Install packages
       working-directory: ./CRX3-Creator-master
       run: pip install -r requirements.txt
@@ -34,3 +36,11 @@ jobs:
       with:
         name: my-artifact-crx
         path: ${{ github.workspace }}/src.crx
+        
+    # now test .crx
+    - name: Install chromium
+      run: sudo apt-get install -y chromium-browser
+    - name: Install packages
+      run: pip install requests webdriver-manager selenium pytest
+    - name: Run script
+      run: pytest -rA
