@@ -11,6 +11,11 @@ var file = fs.createWriteStream('biasRatings.json');
 var _ = require('lodash');
 _.mixin({deepExtend: underscoreDeepExtend(_)});
 
+const queryAllsides = async function(url){
+  let returnValueRaw = await fetch(url);
+  let returnValue = await returnValueRaw.text();
+  return returnValue;
+}
 
 async function makeGetRequest(url){
 
@@ -34,6 +39,7 @@ pages.forEach(function(page) {
   var url = 'https://www.allsides.com/media-bias/ratings?field_featured_bias_rating_value=All&field_news_source_type_tid%5B%5D=2&field_news_bias_nid_1%5B1%5D=1&field_news_bias_nid_1%5B2%5D=2&field_news_bias_nid_1%5B3%5D=3&title=';
   url = url + "&page=" + page;
   console.log("URL********** " + url);
+  
   makeGetRequest(url).then(queryResult => {
   
     console.log(queryResult.length);
@@ -69,6 +75,12 @@ pages.forEach(function(page) {
 
       makeGetRequest(pageLink).then(queryResult => {
         // if (error) throw new Error(error);
+          if(queryResult){
+            console.log('DEBUGURL'+ pageLink)
+            console.log('Query Result: ' + queryResult);
+          }else{
+            console.log('Nothing returned for get request');
+          }
           var $ = cheerio.load(queryResult);
 
           $("a").each(function (i, element) {
@@ -87,8 +99,9 @@ pages.forEach(function(page) {
                   setTimeout(function(){
                   console.log("*******Put to Data********");
                   putData(domain, title, rating, url);}, 10000);
-                }
-              }
+            }else{
+              console.log('debug if 1');
+              
             } catch {
               // console.log("incorrect link");
               // Do nothing.
@@ -96,7 +109,7 @@ pages.forEach(function(page) {
 
           });
       });
-          }, 2000);
+          }, 9000);
     });
   });
 
@@ -117,7 +130,7 @@ async function buildJson(writeData) {
   // timeout for writing to file to ensure that all data is in memory before writing
   setTimeout(function(){
   console.log("*******Wrote to file********");
-  writeData();}, 90000);
+  writeData();}, 60000);
   };
 
 buildJson(writeData);

@@ -18,6 +18,10 @@ $(function() {
     $('#reset_urls').click(function() { reset_urls(); });
 });
 
+$(function() {
+    $('#check_json').click(function() { check_json(); });
+});
+
 
 function checkCurrentTab() {
     //alert('debug1!');
@@ -72,6 +76,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+function check_json(){
+    var temp = JSON.stringify(testData);
+    localStorage.setItem("biasRatings", temp);
+    localStorage.removeItem("4/21/2022");
+    alert('reset date')
+}
 
 function log(txt) {
     var h = $("#log").html();
