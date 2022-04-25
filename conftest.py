@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.utils import ChromeType
 
+#comment
 @pytest.fixture()
 def setup(request):
     chrome_service = Service(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install())
