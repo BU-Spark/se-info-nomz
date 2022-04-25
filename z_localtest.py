@@ -10,7 +10,7 @@ from webdriver_manager.utils import ChromeType
 print(os.getcwd())
 
 chrome_options = ChromeOptions()
-chrome_options.add_extension('test_src.crx')
+chrome_options.add_extension('sample.crx')
 
 driver = webdriver.Chrome('D:/chromedriver/chromedriver', options = chrome_options)
 driver.get('https://google.com')
