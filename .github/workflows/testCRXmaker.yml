@@ -29,7 +29,8 @@ jobs:
     - name: Run script
       working-directory: ./CRX3-Creator-master   
       run: python main.py ../src
-    - name: Check file existence
-      uses: andstor/file-existence-action@v1
+    - name: Run upload artifact
+      uses: actions/upload-artifact@v1
       with:
-        files: "../src.crx"
+        name: my-artifact-crx
+        path: ${{ github.workspace }}/src.crx
