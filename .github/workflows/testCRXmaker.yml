@@ -29,3 +29,6 @@ jobs:
     - name: Run script
       working-directory: ./CRX3-Creator-master   
       run: python main.py ../src
+    - name: Check if file exist
+      run: |
+        file src.crx | grep -q ' CRX '
