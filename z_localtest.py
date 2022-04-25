@@ -1,0 +1,28 @@
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from time import sleep
+import pytest
+import os
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.utils import ChromeType
+
+print(os.getcwd())
+
+chrome_options = ChromeOptions()
+chrome_options.add_extension('src.crx')
+
+driver = webdriver.Chrome('D:/chromedriver/chromedriver', options = chrome_options)
+driver.get('https://google.com')
+sleep(3)
+driver.get('https://youtube.com')
+sleep(3)
+#driver.get('chrome-extension://<YOUR UNIQUE ID HERE>/analysis.html')
+#sleep(3)
+#driver.get('chrome-extension://<YOUR UNIQUE ID HERE>/popup.html')
+input('Press [Enter] To close browser')
+#driver.quit()
+print("done testing selenium")
+
+#my unique id cchbcidihccfckoepeamkmjfpnlfjkbc
+# my key MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCpfMLJ9L3aC7PmiyuYDLEFZmHvt0NwxWU+Ex0oqrKOXllKOHnZ7Zws0AcKPdZSKlGZq9DGlC9yk9mr+6Jzr59tIg1ozany/gXzVxju9hsWKn+unOUosQRwPF5vz04ewRBFaqrJatWE2Ukx06QpKZURlbwCWY7udNTx8+h4/UZAXvpsYFM85o3xkNayKlBy5QjOWUhB8nPv35jbhu7defXo9pi0yuTfZPjQOLwS7AZbwkmJ62A7RUV69WUvtiXxsJREsYapU7EDGN+kd8H1nyfTbuw8Wi8m+yP9gHg7K2UyuqgvFgUGEkB1mI9i37M0fuwqDcq1bGysgv+eIaDLRk+bAgMBAAECggEAEWhB7VIYqatoB7alfJFZIQ/Z4S/2Wj+73TtDVGjru9mO3COeyDYyQxv+jRu6xmeYR+swnySbFu5+fb5zeeRAwImtzOTKnq1eWRbJ9ckLESS+RmXQ13QO26Qnot4szNXRYP/KmLNDSMi0TszI4H1n1Q2G6Mrf9jfDozIE32BL9dJgbmP8zwsxEBWx5HR3A5QdNq406QVGEuhxfpZ0zQbfVg8LAM0XdekkclnoH7ZCf5XtuVW062WONuG5jxXsA3IYCefhco/xGU1WdqFEYCrIAUkGsqKOJ2WymYl52VS0AYJ4C4jQFtKgDb/WLpA+cM8zKDMqGI5VCvHHrR15Lr984QKBgQDmctC5EPHj09twyW7PrgK6/YVy1eMwdKdWjySO2olXpB7cSPquDKMnpCaXNa8Ky1n8+KT71hJvrDRz/Uk/oK0wnUWaO4RRpmkPukRfSEkIvhv2pp/OlSykL0tju2Ln1FeLLNUTfWSNDNoOgmGhsgthDXFDBaJnfFrepMHIYH7e6wKBgQC8R5a08huHuUXPaCrYgm99hFPBENl7OxOUcsyplkELT+VZdxsD2+Zt4yXw7PgijcRTvuXuTIj+o2+5mZcwRtD6JofnAuwtJjT5fHKiU+o3HhvGK661iXup3G3FxznkKevvVMCsLPQuPc8gXz18/R8SzFmBMZRVPK0lAnVmFOAGEQKBgQDmDRhwp4nSdlxKa8xDZuMy6IOf8AWtCcdDkgJc2azh4OUt42zc86CsoiIkMWNc00QyVcXd4gbllHOIlwHYkv5R2a7yGRguqoGXQcufkvnV0HL597zw7dpyzQPlu9sws7nxJgBQRI1sgbftZBsy4Bqb+F9pGObXiDzupmsNLcd5oQKBgGJ59yNxNmEI0LCoxTA1GOdHnR7wFzBTN+x/Fvjkc+TcxxLCL0kXbTCwjBm1eBtqlvNOd6jqMwUsqrUi1mcTwx3zpUV4y9rZjv+mzbaFuY1WnCRMmLau0BWKC4hUqbzjCFpHs/baFGVTQtClv91t7yC/7VibfAARGmavIIRiCsJhAoGBAKUBSrVclkgAB5ocA1oPSz4DwYtf755Mw0TkQasdJcTn7MHizVB9Yh70hK25u2/kTpZ9SWxkaLKEAUUNUsZUHPULw25Z4jznNdsa3G8fTOzF5ZGjy7Vla48QS8momW+cSZVb6S1lF84erLCZjg1WZBw7bpru34/QQBmAreh7Gvbq
