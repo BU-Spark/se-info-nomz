@@ -12,7 +12,7 @@ def setup(request):
     chrome_service = Service(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install())
 
     chrome_options = ChromeOptions()
-    chrome_options.add_extension('sample.crx')
+    chrome_options.add_extension('src.crx')
 
     options = [
     "--headless",
