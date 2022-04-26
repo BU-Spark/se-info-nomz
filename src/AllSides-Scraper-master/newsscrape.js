@@ -1,21 +1,21 @@
-const request = require('request');
+// const request = require('request');
 // var rp = require('request-promise'); //maybe later :)
 const cheerio = require('cheerio');
-var lodash = require('lodash');
-var underscoreDeepExtend = require('underscore-deep-extend');
-var fs = require('fs');
+// var lodash = require('lodash');
+// var underscoreDeepExtend = require('underscore-deep-extend');
+// var fs = require('fs');
 const fetch = require('node-fetch');
 
-var file = fs.createWriteStream('biasRatings.json');
-
-var _ = require('lodash');
-_.mixin({deepExtend: underscoreDeepExtend(_)});
+// var _ = require('lodash');
+// _.mixin({deepExtend: underscoreDeepExtend(_)});
 
 
 async function makeGetRequest(url){
 
+  const data = {};
   const response = await fetch(url);
   const query = await response.text();
+  // console.log(query);
 
   return query;
 }
@@ -106,6 +106,7 @@ return data;
 
 async function writeData() {
   await localStorage.setItem('biasRatings', "data = " + JSON.stringify(data), function (err) {
+  // await console.log(JSON.stringify(data), function (err) {
     if (err) throw new Error(error);
     console.log('Writing to file...');
   });

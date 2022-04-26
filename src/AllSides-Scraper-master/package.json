@@ -4,7 +4,8 @@
   "description": "Scraper for AllSides bias ratings for news sites",
   "main": "newsscrape.js",
   "scripts": {
-    "start": "node newsscrape.js"
+    "start": "node newsscrape.js",
+    "start2": "node newsscrape2.js"
   },
   "keywords": [
     "scraper",
@@ -18,6 +19,7 @@
     "document": "^0.0.0",
     "fetch": "^1.1.0",
     "got": "^12.0.3",
+    "jquery": "^3.6.0",
     "lodash": "^4.17.2",
     "node-fetch": "^2.6.7",
     "nth-check": "^2.0.1",
