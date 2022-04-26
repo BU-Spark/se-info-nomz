@@ -9,8 +9,7 @@ from webdriver_manager.utils import ChromeType
 #comment
 @pytest.fixture()
 def setup(request):
-    #chrome_service = Service(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install())
-    #request.cls.driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    chrome_service = Service(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install())
 
     chrome_options = ChromeOptions()
     chrome_options.add_extension('src.crx')
@@ -25,7 +24,8 @@ def setup(request):
     for option in options:
         chrome_options.add_argument(option)
 
-    request.cls.driver = webdriver.Chrome(executable_path='.\chromedriver\chromedriver.exe', options=chrome_options)
+    request.cls.driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+    #request.cls.driver = webdriver.Chrome(executable_path='.\chromedriver\chromedriver.exe', options=chrome_options)
 
     yield request.cls.driver
     request.cls.driver.close()
