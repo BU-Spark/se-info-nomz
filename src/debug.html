@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <meta charset="utf-8">
-        <title>Infonomz Browser Extension</title>
-        <link rel="stylesheet" href="node_modules/bootstrap/css/bootstrap.css"/>
-        
-        <link href="style/popup.css" rel="stylesheet"/>
-        <script src="./AllSides-Scraper-master/biasRatings.json"></script>
-        <script src="scripts/popup.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <meta charset="utf-8">
+      <title>Infonomz Browser Extension</title>
+      <!-- Importing bootstrap from css file -->
+      <link rel="stylesheet" href="node_modules/bootstrap/css/bootstrap.css"/>
+      <!-- Importing custom css from file -->
+      <link href="style/debug.css" rel="stylesheet"/>
+      <script src="./AllSides-Scraper-master/biasRatings.json"></script>
+      <script src="scripts/debug.js"></script>
     </head>
 
     <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="analysis.html">Analysis</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">etc</a>
-        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="home.html">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="analysis.html">Analysis</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Debug</a>
+      </li>
     </ul>
 
     <body>
-        <h1 class="display-3">Analyze webpage: </h1> 
-        <button id="btn_check" class="btn btn-warning">Check Current Tab</button>
-        <button id="query_allsides" class="btn btn-warning">Query Allsides</button>
-        <button id="display_urls" class="btn btn-warning">Display URLS</button>
-        <button id="display_bias" class="btn btn-warning">Display Bias</button>
-        <button id="reset_urls" class="btn btn-warning">Reset URLS</button>
+      <h1>Debug: </h1> 
+      <button type="button" id="btn_check" class="btn btn-info">check current tab</button>
+      <button id="query_allsides" class="btn btn-danger">query allsides</button>
+      <button id="test_scraper" class="btn btn-secondary">test scraper</button>
+      <button id="check_biasRatings" class="btn btn-warning">check BiasRatings</button>
+      <button id="display_urls" class="btn btn-warning">Display URLS</button>
+      <button id="display_bias" class="btn btn-warning">Display Bias</button>
+      <button id="local_storage" class="btn btn-warning">Display storage</button>
+      <button id="reset_storage" class="btn btn-warning">Reset storage</button>
+      <button id="reset_urls" class="btn btn-warning">Reset URLS</button>
 
-        <button id="check_json" class="btn btn-warning">Update Bias Ratings</button>
+      <button id="check_json" class="btn btn-warning">Update Bias Ratings</button>
         <hr>
         <div id="pg_url"></div>
         <hr>

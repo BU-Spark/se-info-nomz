@@ -6,6 +6,8 @@
         <title>Infonomz Browser Extension</title>
         <!-- Importing bootstrap from css file -->
         <link rel="stylesheet" href="node_modules/bootstrap/css/bootstrap.css"/>
+        <!-- Importing IvyMode font -->
+        <link rel="stylesheet" href="https://use.typekit.net/hfd0apb.css">
         <!-- Importing custom css from file -->
         <link href="style/debug.css" rel="stylesheet"/>
         <script src="scripts/debug.js"></script>
@@ -13,10 +15,10 @@
 
     <ul class="nav nav-tabs">
         <li class="nav-item">
-          <a class="nav-link" href="home.html">Home</a>
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Analysis</a>
+          <a class="nav-link" href="analysis.html">Analysis</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="debug.html">Debug</a>
@@ -24,7 +26,8 @@
     </ul>
 
     <body>
-        <h1>Analytics: </h1> 
+        <h1 class="display-1" style="font-weight:semibold"><font face="ivymode" size="17px">i<font color="#e35ba3">n</font>fo <font color="#e35ba3">n</font>omz</font></h1> 
+        <h4>Here's your weekly summary: </font></h4> 
 
         <div class="callout-info">You've read ____ articles.</div>
         <div class="callout-political">You've read ____ left/right leaning articles.</div>

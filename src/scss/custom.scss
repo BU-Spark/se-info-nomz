@@ -3,10 +3,6 @@
 
 // Include any default variable overrides here (though functions won't be available)
 
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
-
-// Then add additional custom code here
-
 $primary: #e35ba3;
 $secondary: #8093e2;
 $success: #e53c51;
@@ -14,11 +10,16 @@ $info: #e57682;
 $warning: #9580f0;
 $danger: #d81712;
 
-$headings-margin-bottom:      $spacer * .5;
-$headings-font-family:        IvyMode;
+$headings-font-family:        Franklin Gothic;
 $headings-font-style:         null;
 $headings-font-weight:        500;
 $headings-line-height:        1.2;
 $headings-color:              $secondary;
 
-$displays-color:              $secondary;
+$displays-color:              $warning;
+
+// Then, import the bootstrap code
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+// Then add additional custom code here
