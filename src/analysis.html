@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="node_modules/bootstrap/css/bootstrap.css"/>
         <!-- Importing custom css from file -->
         <link href="style/debug.css" rel="stylesheet"/>
-        <script src="scripts/debug.js"></script>
+        <script src="scripts/analysis.js"></script>
     </head>
 
     <ul class="nav nav-tabs">
@@ -26,10 +26,9 @@
     <body>
         <h1>Analytics: </h1> 
 
-        <div class="callout-info">You've read ____ articles.</div>
-        <div class="callout-political">You've read ____ left/right leaning articles.</div>
-        <div class="callout-topical">Your most frequent topic is ____.</div>
-        <!-- Bootstrap Bundle with Popper -->
+        <div id="callout_info" class="callout-info"></div>
+        <div id="callout_political" class="callout-political"></div>
+        <div id="callout_topical" class="callout-topical"></div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
 </html>
