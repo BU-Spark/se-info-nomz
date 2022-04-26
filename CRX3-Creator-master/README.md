@@ -1,3 +1,5 @@
+https://github.com/pawliczka/CRX3-Creator <-- ALL CREDIT FOR THIS DIRECTORY GOES TO THEM. ONLY USING THIS FOR THE PURPOSES OF CI/CD
+
 # CRX3-Creator
 
 Python script for building google chrome extension crx3 package.
