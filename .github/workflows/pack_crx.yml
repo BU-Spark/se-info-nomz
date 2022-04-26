@@ -40,7 +40,7 @@ jobs:
     # now test .crx
 #     - name: Install chromium
 #       run: sudo apt-get install -y chromium-browser
-    - name: Install packages
-      run: pip install requests webdriver-manager selenium pytest
-    - name: Run script
-      run: pytest -rA
+#     - name: Install packages
+#       run: pip install requests webdriver-manager selenium pytest
+#     - name: Run script
+#       run: pytest -rA
