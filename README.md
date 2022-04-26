@@ -1,4 +1,4 @@
-Latest .crx
+vvv LATEST .CRX RELEASE vvv
 
 [![Latest .crx](https://github.com/BU-Spark/se-info-nomz/actions/workflows/pack_crx.yml/badge.svg)](https://github.com/BU-Spark/se-info-nomz/actions/workflows/pack_crx.yml)
 
