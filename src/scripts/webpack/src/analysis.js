@@ -1,10 +1,8 @@
 
-export function displayBias() {
+export function displayBias(val) {
     //alert("HELLO");
     const week = 7; 
-    var today = new Date();
     var pointer = new Date();
-    var dates = [];
     var bias_json;
     var month, day, year;
     var left = 0;
@@ -12,7 +10,7 @@ export function displayBias() {
     var center = 0;
     var right_leaning = 0;
     var right = 0;
-    for(let i = 0; i < week; i++){
+    for(let i = 0; i < val; i++){
         month = pointer.getMonth()+1;
         day = pointer.getDate();
         year = pointer.getFullYear();
@@ -35,7 +33,7 @@ export function displayBias() {
 }
 
 window.onload = function(){
-    var bias = displayBias();
+    var bias = displayBias(7);
     //alert(bias);
     var article_sum = 0;
     for (let i = 0; i < bias.length; i++) {

@@ -54,3 +54,7 @@ body{
 textarea[readonly]{
     background:#ddd;
 }
+
+.slider{
+    width: 100%;
+}
