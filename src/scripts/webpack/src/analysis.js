@@ -72,3 +72,10 @@ window.onload = function(){
     document.getElementById('callout_topical').innerHTML = "Your most frequent topic is ____.";
 
 }
+
+
+
+// Update the current slider value (each time you drag the slider handle)
+// slider.oninput = function() {
+//   output.innerHTML = this.value;
+// }
