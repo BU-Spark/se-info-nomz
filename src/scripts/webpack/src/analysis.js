@@ -1,5 +1,5 @@
 
-function displayBias() {
+export function displayBias() {
     //alert("HELLO");
     const week = 7; 
     var today = new Date();
