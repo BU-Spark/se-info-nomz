@@ -53,38 +53,7 @@ Chart.register(
     SubTitle
 );
 
-function displayBias(days) {
-    //alert("HELLO");
-    var pointer = new Date();
-    var bias_json;
-    var month, day, year;
-    var left = 0;
-    var left_leaning = 0;
-    var center = 0;
-    var right_leaning = 0;
-    var right = 0;
-    for(let i = 0; i < days; i++){
-        month = pointer.getMonth()+1;
-        day = pointer.getDate();
-        year = pointer.getFullYear();
-        var currentDate = month + '/' + day + '/' + year
-        //alert(currentDate);
-        if(localStorage.getItem(currentDate)){
-            //alert("Detected");
-            bias_json = JSON.parse(localStorage.getItem(currentDate));
-            left = left + bias_json.Left;
-            left_leaning = left_leaning + bias_json.LeanLeft;
-            center = center + bias_json.Center;
-            right_leaning = right_leaning + bias_json.LeanRight;
-            right = right + bias_json.Right;
-        }
-        pointer.setDate(pointer.getDate() - 1);
-    }
-    //alert("Last Week: " + pointer);
-    //alert(dates);
-    return [left,left_leaning,center,right_leaning,right];
-}
-
+import {displayBias} from './analysis';
 
 //alert(bias);
 function drawChart(bias){
