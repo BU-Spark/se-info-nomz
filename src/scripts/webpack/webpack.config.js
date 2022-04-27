@@ -14,6 +14,7 @@ module.exports = [{
     path: path.resolve(__dirname, '..'),
   },
 },
+
 {
   entry: './src/analysis.js',
   output: {

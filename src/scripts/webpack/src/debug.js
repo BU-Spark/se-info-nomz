@@ -270,7 +270,7 @@ async function test_scraper() {
   }
   
   async function writeData() {
-    await localStorage.setItem('biasRatings', "data = " + JSON.stringify(data), function (err) {
+    await localStorage.setItem('biasRatings', JSON.stringify(data), function (err) {
     // await console.log(JSON.stringify(data), function (err) {
       if (err) throw new Error(error);
       console.log('Writing to file...');
