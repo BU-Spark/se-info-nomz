@@ -1,3 +1,4 @@
+# automatically creates the .crx file for the extension to use in testing with selenium.
 name: automate crx test
 
 on:
