@@ -15,7 +15,7 @@ InfoNomz is a web extension tool that keeps track of your media consumption and 
 
 # Usage
 1. After installing InfoNomz, check the top-right corner and click on the jigsaw icon. Click on "InfoNomz Browser Extension" to access the tool. You can additionally **pin** it for ease of access.
-2. If you wish to test the extension with python, you can get the .crx file of our extension through the button at the top of the README to access the github workflow. From there, click on the most recent workflow and download the Artifact (labeled my-artifact-crx) to get the .crx file of the extension. The `test_local.py` file can be used as a template of sorts to test the extension locally automatically.
+2. If you wish to test the extension with python locally, you can get the .crx file of our extension through the button at the top of the README to access the github workflow. From there, click on the most recent workflow and download the Artifact (labeled my-artifact-crx) to get the .crx file of the extension. The `test_local.py` file can be used as a template of sorts to test the extension locally automatically.
 
 # Future Updates
 We are constantly aiming to improve the functionality of InfoNomz and to add more and more features to it. As time passes, we plan on implementing these features into the extension eventually: 
