@@ -1,4 +1,4 @@
-NOTE: Currently, there is no way to test chrome extensions with selenium and github actions, due to github actions requiring chrome be run `--headless` for workflows, and chrome extensions being incompatible with 
+**NOTE: Currently, there is no way to test chrome extensions with selenium and github actions, due to github actions requiring chrome be run `--headless` for workflows, and chrome extensions being incompatible with --headless chrome browsers. Until a workaround or solution is created/found, the only way to test chrome extensions with python and selenium is manually on your local device.**
 
 For all things related to Selenium, please follow this guide.
 
