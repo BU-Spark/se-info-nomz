@@ -9,7 +9,11 @@ For all things related to Selenium, please follow this guide.
 
 2. You will need the packed .crx file for the extension next. You can get the .crx file of our extension through the button at the top of to access the github workflow that automatically creates it. From there, click on the most recent job for that workflow and download the Artifact (labeled my-artifact-crx) to get the .crx file of the extension. 
 
-3. You will need to install both Selenium and ChromeDriver. The former can be done with `pip install selenium`. The latter can be done by visiting their [website](https://chromedriver.chromium.org/downloads) and downloading chromedriver.exe from there. Get the one that matches your specific version of Chrome, which can be found by going to **Settings --> About Chrome**. After downloading the zip file, unarchive it in a directory that will have permission to run it. Alternatively, you can download the chromedriver by using `chrome_service = Service(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install())` or `Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())` if you want to skip downloading chromedriver manually.
+3. You will need to install both Selenium and ChromeDriver. The former can be done with `pip install selenium`. The latter can be done by visiting their [website](https://chromedriver.chromium.org/downloads) and downloading chromedriver.exe from there. Get the one that matches your specific version of Chrome, which can be found by going to **Settings --> About Chrome**. After downloading the zip file, unarchive it in a directory that will have permission to run it. Alternatively, you can download the chromedriver by using 
+`chrome_service = Service(ChromeDriverManager(chrome_type=ChromeType.GOOGLE).install())` 
+or 
+`Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())` 
+if you want to skip downloading chromedriver manually.
 
 4. To test if ChromeDriver is working, try to run the **test_local.py** file in the directory. If everything is working, it should open up Chrome automatically and go through the websites. It also acts as a good benchmark of the code you will need in order to make a script using Selenium and ChromeDriver.
 
