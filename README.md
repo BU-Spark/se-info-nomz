@@ -20,8 +20,19 @@ InfoNomz is a web extension tool written in HTML, Javascript, and CSS that keeps
 # Future Updates
 We are constantly aiming to improve the functionality of InfoNomz and to add more and more features to it. As time passes, we plan on implementing these features into the extension eventually: 
 
-● More statistics and visualizations to help users better understand their consumption habits
+- More statistics and visualizations to help users better understand their consumption habits
 
-● Suggest possible alternative news media to users that may tend to explore one side of the political spectrum more than the other
+- Suggest possible alternative news media to users that may tend to explore one side of the political spectrum more than the other
 
-● Sorting media consumption into categories (sports, business, politics, etc.) and suggesting articles of media from categories that you may not explore as often
+- Sorting media consumption into categories (sports, business, politics, etc.) and suggesting articles of media from categories that you may not explore as often
+
+- Adding this extension into the actual Google Chrome extension store.
+
+# Known Issues
+ 
+- Certain articles are counted twice when collecting data (https://github.com/BU-Spark/se-info-nomz/issues/22).
+
+- Chart area on analysis page is blank when there is no data collected (https://github.com/BU-Spark/se-info-nomz/issues/24).
+
+- biasRatings json in local storage is not updated automatically (https://github.com/BU-Spark/se-info-nomz/issues/23).
+
