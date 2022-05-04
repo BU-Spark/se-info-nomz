@@ -1,5 +1,5 @@
+//Returns the political bias score of the past 7 days
 function displayWeeklyBias() {
-    //alert("HELLO");
     const week = 7; 
     var today = new Date();
     var pointer = new Date();
@@ -16,9 +16,7 @@ function displayWeeklyBias() {
         day = pointer.getDate();
         year = pointer.getFullYear();
         var currentDate = month + '/' + day + '/' + year
-        //alert(currentDate);
         if(localStorage.getItem(currentDate)){
-            //alert("Detected");
             bias_json = JSON.parse(localStorage.getItem(currentDate));
             left = left + bias_json.Left;
             left_leaning = left_leaning + bias_json.LeanLeft;
@@ -28,8 +26,7 @@ function displayWeeklyBias() {
         }
         pointer.setDate(pointer.getDate() - 1);
     }
-    //alert("Last Week: " + pointer);
-    //alert(dates);
+
     return [left,left_leaning,center,right_leaning,right];
 }
 
