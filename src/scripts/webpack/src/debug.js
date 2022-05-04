@@ -6,10 +6,6 @@ $(function() {
 });
 
 $(function() {
-    $('#display_bias').click(function() { log_bias(); });
-});
-
-$(function() {
     $('#check_json').click(function() { check_json(); });
 });
 
@@ -42,47 +38,6 @@ function checkCurrentTab() {
 
     });
 }
-
-// inject contentscripts into current tab
-document.addEventListener('DOMContentLoaded', function () {
-    chrome.windows.getCurrent(function (currentWindow) {
-        chrome.tabs.query({active: true, windowId: currentWindow.id}, function(activeTabs) {
-            // alert('inside chrome tabs query');
-            // alert(activeTabs[0].id);
-            chrome.tabs.executeScript(activeTabs[0].id, {file: "scripts/contentScript.js", allFrames: false});
-            // alert('after chrome tabs execute Script');
-        });
-    });
-});
-
-function check_json(){
-    var temp = JSON.stringify(testData);
-    localStorage.setItem("biasRatings", temp);
-    localStorage.removeItem("4/21/2022");
-    alert('reset date')
-}
-
-function log(txt) {
-    var h = $("#log").html();
-    $("#log").html(h+"<br>"+txt);
-}
-
-function log_urls(){
-    var current_json = JSON.parse(localStorage.getItem("InfoNomz"));
-    $("#log_urls").html(current_json.urls.join(", "));
-}
-
-
-function log_bias(){
-    var bias_json = JSON.parse(localStorage.getItem("InfoNomz")).political_bias;
-    $("#log_urls").html(JSON.stringify(bias_json));
-}
-
-function updateBias(bias_string){
-    var current_json = JSON.parse(localStorage.getItem("InfoNomz"));
-    //current_json.political_bias
-}
-
 
 /*
  * Parses the Bias of an allsides HTML response page.
@@ -118,6 +73,9 @@ function parseBias(input_string){
  * This function was primarily derrived from the following allsides scraper by sautumn on github.
  * See the source here: https://github.com/sautumn/AllSides-Scraper
  * Several adjustments were made to their code, as it was very old and not optimized.
+ * The button "test scraper" runs this function on the debug tab, takes around 2-3 minutes for it to create
+ * the biasRatings json and write it into local storage; there will be an alert at the end that signals when
+ * the function has finished writing to local storage
  */  
 async function test_scraper() {
   alert("scraper started")
