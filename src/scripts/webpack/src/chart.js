@@ -1,3 +1,4 @@
+// this is importing chart.js files. In reality most of these are not currently used, however.
 import {
     Chart,
     ArcElement,
@@ -53,10 +54,11 @@ Chart.register(
     SubTitle
 );
 
+// import the displayBias function, which gets the bias values from the last x days.
 import {displayBias} from './analysis';
 
-//alert(bias);
 function drawChart(bias){
+    // declare the chart and set it to have the following values
     let myChart = document.getElementById('myChart').getContext('2d');
     let doughnutChart = new Chart(myChart, {
     type:'doughnut',
@@ -92,15 +94,17 @@ output.innerHTML = slider.value;
 var time_frame = slider.value; 
 drawChart(displayBias(7)); // draws a chart with the default time_frame of 7 days
 
-
+// update the chart when the slider updates.
 slider.oninput = function() {
     output.innerHTML = this.value;
+    // get the current Chart object from the webpage so we can edit it.
     const current_chart = Chart.getChart("myChart");
     current_chart.data.datasets[0].data = displayBias(this.value);
     current_chart.update();
     
     var bias = displayBias(slider.value);
 
+    // After updating the chart, we must also update the text bubbles below it.
     var article_sum = 0;
     for (let i = 0; i < bias.length; i++) {
         article_sum = article_sum + bias[i];
@@ -108,10 +112,11 @@ slider.oninput = function() {
     var aggr = 0;
     for (let i = 0; i < bias.length; i++) {
         aggr = aggr + bias[i]*(i+1);
-        //alert(aggr);
+        
     }
     aggr = aggr/article_sum;
-    //alert(aggr);
+    
+    // these document tags that are referred to are found in 'analysis.html' 
     document.getElementById('callout_info').innerHTML = "You've read " + article_sum + " political articles.";
 
     if (article_sum == 0){
@@ -134,7 +139,4 @@ slider.oninput = function() {
     }
 
     document.getElementById('callout_topical').innerHTML = "Your most frequent topic is ____.";
-
-    // current_chart.destroy();
-    // drawChart(displayBias(time_frame));
-} // Display the default slider value
+}
