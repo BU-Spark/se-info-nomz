@@ -2,7 +2,8 @@
 
 For information regarding selenium testing with the extension, refer [here](https://github.com/BU-Spark/se-info-nomz/blob/dev/SeleniumREADME.md)
 
-To download the latest stable release go here: https://github.com/BU-Spark/se-info-nomz/releases/tag/v0.1-beta
+## To download the latest stable release go here: 
+https://github.com/BU-Spark/se-info-nomz/releases/tag/v0.1-beta
 
 # InfoNomz
 InfoNomz is a web extension tool written in HTML, Javascript, and CSS that keeps track of your media consumption and converts this data into useful statistics. InfoNomz notably analyzes news media that you consume, sorts political content into a specific political leaning with the help of [AllSides Media Bias Ratings](https://www.allsides.com/media-bias) and provides visualizations of how much of each type of political leaning you tend to consume.
