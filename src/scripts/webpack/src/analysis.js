@@ -15,9 +15,7 @@ export function displayBias(val) {
         day = pointer.getDate();
         year = pointer.getFullYear();
         var currentDate = month + '/' + day + '/' + year
-        //alert(currentDate);
         if(localStorage.getItem(currentDate)){
-            //alert("Detected");
             bias_json = JSON.parse(localStorage.getItem(currentDate));
             left = left + bias_json.Left;
             left_leaning = left_leaning + bias_json.LeanLeft;
@@ -27,8 +25,6 @@ export function displayBias(val) {
         }
         pointer.setDate(pointer.getDate() - 1);
     }
-    //alert("Last Week: " + pointer);
-    //alert(dates);
     return [left,left_leaning,center,right_leaning,right];
 }
 
