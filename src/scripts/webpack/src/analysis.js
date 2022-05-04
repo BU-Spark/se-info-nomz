@@ -1,6 +1,6 @@
 
+//Returns the cumulative political bias score of the number of days (val)
 export function displayBias(val) {
-    //alert("HELLO");
     const week = 7; 
     var pointer = new Date();
     var bias_json;
@@ -30,7 +30,7 @@ export function displayBias(val) {
 
 window.onload = function(){
     var bias = displayBias(7);
-    //alert(bias);
+
     var article_sum = 0;
     for (let i = 0; i < bias.length; i++) {
         article_sum = article_sum + bias[i];
@@ -38,10 +38,9 @@ window.onload = function(){
     var aggr = 0;
     for (let i = 0; i < bias.length; i++) {
         aggr = aggr + bias[i]*(i+1);
-        //alert(aggr);
     }
-    aggr = aggr/article_sum;
-    //alert(aggr);
+    aggr = aggr/article_sum; //average bias score of given time range
+
     document.getElementById('callout_info').innerHTML = "You've read " + article_sum + " political articles.";
 
     if (article_sum == 0){
@@ -66,10 +65,3 @@ window.onload = function(){
     document.getElementById('callout_topical').innerHTML = "Your most frequent topic is ____.";
 
 }
-
-
-
-// Update the current slider value (each time you drag the slider handle)
-// slider.oninput = function() {
-//   output.innerHTML = this.value;
-// }

@@ -6,15 +6,7 @@ $(function() {
 });
 
 $(function() {
-    $('#display_urls').click(function() { log_urls(); });
-});
-
-$(function() {
     $('#display_bias').click(function() { log_bias(); });
-});
-
-$(function() {
-    $('#reset_urls').click(function() { reset_urls(); });
 });
 
 $(function() {
@@ -29,10 +21,10 @@ $(function() {
   $('#check_biasRatings').click(function() { check_biasRatings(); });
 });
 
+// gets current tab's url
 function checkCurrentTab() {
-    //alert('debug1!');
     chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-        // gets current tab's url and stores in var url
+        
         var url = tabs[0].url;
         $(".pg_url").text(url);
 
@@ -80,14 +72,6 @@ function log_urls(){
     $("#log_urls").html(current_json.urls.join(", "));
 }
 
-function reset_urls(){
-    var current_json = JSON.parse(localStorage.getItem("InfoNomz"));
-    current_json.urls = [];
-    localStorage.setItem("InfoNomz", JSON.stringify(current_json));
-    //console.log(javaObject);
-    $("#log_urls").html("URLS Reset!");
-    //alert(jQuery.type(jsonString));
-}
 
 function log_bias(){
     var bias_json = JSON.parse(localStorage.getItem("InfoNomz")).political_bias;
