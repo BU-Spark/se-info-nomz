@@ -37,6 +37,8 @@ We are constantly aiming to improve the functionality of InfoNomz and to add mor
 
 - biasRatings json in local storage is not updated automatically (https://github.com/BU-Spark/se-info-nomz/issues/23).
 
+- Scrapper for AllSides does not always pull all available URLs (https://github.com/BU-Spark/se-info-nomz/issues/28).
+
 # Deployments
 When stable deployments are created, they should (and will) be added to a github release. The latest release will be available at the top of this document for download. Testing should be run via Selenium to ensure that the extension can be installed correctly, and such. More information on Selenium here: https://github.com/BU-Spark/se-info-nomz/blob/dev/SeleniumREADME.md
 
