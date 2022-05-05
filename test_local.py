@@ -1,6 +1,7 @@
 '''
 test_local.py
-For automated testing with the extension with chromedriver and selenium. Feel free to use this as a template for testing the extension locally.
+For automated testing with the extension with chromedriver and selenium. Feel free to use this as a template for testing the extension locally. To learn more about testing
+with chromedriver and selenium, please refer to the readme also present in this repo.
 '''
 
 from selenium import webdriver
