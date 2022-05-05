@@ -1,0 +1,24 @@
+{
+    "name": "INFONOMZ-TEST",
+    "version": "0.1",
+    "description": "my desc",
+    "permissions": [
+      "tabs",
+      "<all_urls>",
+      "webNavigation"
+    ],
+    "icons": {
+        "16": "icons/icon16x16.png",
+        "48": "icons/icon48x48.png",
+        "128": "icons/icon128x128.png"
+    },
+    "browser_action": {
+        "default_title": "INFONOMZ TEST",
+        "default_popup": "home.html"
+    },
+    "background": {
+        "scripts" : ["scripts/background.js"]
+    },
+    "manifest_version": 2,
+    "content_security_policy": "script-src 'self' https://ajax.googleapis.com object-src 'self'"
+  }
