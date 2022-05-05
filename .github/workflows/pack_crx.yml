@@ -1,6 +1,7 @@
 # automatically creates the .crx file for the extension to use in testing with selenium.
 name: automate crx test
 
+# this will occur every time a push is done or a pr is accepted on the DEV branch
 on:
   push:
     branches: [ dev ]
@@ -38,10 +39,3 @@ jobs:
         name: my-artifact-crx
         path: ${{ github.workspace }}/src.crx
         
-    # now test .crx
-#     - name: Install chromium
-#       run: sudo apt-get install -y chromium-browser
-#     - name: Install packages
-#       run: pip install requests webdriver-manager selenium pytest
-#     - name: Run script
-#       run: pytest -rA
